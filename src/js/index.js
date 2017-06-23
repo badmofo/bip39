@@ -433,8 +433,10 @@
             var path = "m/";
             path += purpose + "'/";
             path += coin + "'/";
-            path += account + "'/";
-            path += change;
+            path += account + "'";
+            if (!network.noChange) {
+                path += "/" + change;
+            }
             DOM.bip44path.val(path);
             var derivationPath = DOM.bip44path.val();
             console.log("Using derivation path from BIP44 tab: " + derivationPath);
@@ -585,7 +587,7 @@
                     indexText = indexText + "'";
                 }
                 // Ethereum values are different
-                if (networks[DOM.network.val()].name == "Ethereum") {
+                if (network.ethereum) {
                     var privKeyBuffer = key.privKey.d.toBuffer();
                     privkey = privKeyBuffer.toString('hex');
                     var addressBuffer = ethUtil.privateToAddress(privKeyBuffer);
@@ -1099,10 +1101,24 @@
             },
         },
         {
-            name: "Ethereum",
+            name: "Ethereum (Standard BIP44)",
             onSelect: function() {
-                network = bitcoin.networks.bitcoin;
+                network = bitcoin.networks.eth;
                 DOM.bip44coin.val(60);
+            },
+        },
+        {
+            name: "Ethereum (Ledger Nano S)",
+            onSelect: function() {
+                network = bitcoin.networks.ledgereth;
+                DOM.bip44coin.val(60);
+            },
+        },
+        {
+            name: "Ethereum Classic (Ledger Nano S)",
+            onSelect: function() {
+                network = bitcoin.networks.ledgeretc;
+                DOM.bip44coin.val(61);
             },
         },
         {

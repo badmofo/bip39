@@ -116,3 +116,35 @@ bitcoin.networks.zcash = {
   wif: 0x80
 };
 
+bitcoin.networks.eth = {
+  bip32: {
+    public: 0xffffffff,
+    private: 0xffffffff
+  },
+  pubKeyHash: 0xff,
+  wif: 0xff,
+  ethereum: true
+};
+
+bitcoin.networks.ledgereth = {
+  bip32: {
+    public: 0xffffffff,
+    private: 0xffffffff
+  },
+  pubKeyHash: 0xff,
+  wif: 0xff,
+  ethereum: true,
+  noChange: true
+};
+
+bitcoin.networks.ledgeretc = {
+  bip32: {
+    public: 0xffffffff,
+    private: 0xffffffff
+  },
+  pubKeyHash: 0xff,
+  wif: 0xff,
+  ethereum: true,
+  noChange: true
+};
+
