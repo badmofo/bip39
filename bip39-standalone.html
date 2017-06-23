@@ -16605,7 +16605,8 @@ function Address (hash, version) {
   typeForce('Buffer', hash)
 
   assert.strictEqual(hash.length, 20, 'Invalid hash length')
-  assert.strictEqual(version & 0xff, version, 'Invalid version byte')
+  //needed for zcash
+  //assert.strictEqual(version & 0xff, version, 'Invalid version byte')
 
   this.hash = hash
   this.version = version
@@ -16628,11 +16629,26 @@ Address.fromOutputScript = function (script, network) {
   assert(false, script.toASM() + ' has no matching Address')
 }
 
+/* // pre-zcash
 Address.prototype.toBase58Check = function () {
   var payload = new Buffer(21)
   payload.writeUInt8(this.version, 0)
   this.hash.copy(payload, 1)
 
+  return base58check.encode(payload)
+}
+*/
+// zcash version
+Address.prototype.toBase58Check = function () {
+  var payload = new Buffer(21);
+  if (this.version > 0xFF) {
+    payload = new Buffer(22);
+    payload.writeUInt16BE(this.version, 0);
+    this.hash.copy(payload, 2);
+  } else {
+    payload.writeUInt8(this.version, 0);
+    this.hash.copy(payload, 1);
+ }
   return base58check.encode(payload)
 }
 
@@ -19970,6 +19986,17 @@ bitcoin.networks.slimcointn = {
   pubKeyHash: 0x6f,
   scriptHash: 0xc4,
   wif: 0x57,
+};
+
+bitcoin.networks.zcash = {
+  magicPrefix: '\x16Zcash Signed Message:\n',
+  bip32: {
+    public: 0x0488B21E,
+    private: 0x05358394
+  },
+  pubKeyHash: 0x1CB8,
+  scriptHash: 0x1CBD,
+  wif: 0x80
 };
 
 </script>
@@ -44923,6 +44950,13 @@ window.Entropy = new (function() {
                 DOM.bip44coin.val(1);
             },
         },
+        {
+            name: "Zcash",
+            onSelect: function() {
+                network = bitcoin.networks.zcash;
+                DOM.bip44coin.val(133);
+            },
+        }
     ]
 
     var clients = [

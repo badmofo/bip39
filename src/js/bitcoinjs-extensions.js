@@ -105,3 +105,14 @@ bitcoin.networks.slimcointn = {
   wif: 0x57,
 };
 
+bitcoin.networks.zcash = {
+  magicPrefix: '\x16Zcash Signed Message:\n',
+  bip32: {
+    public: 0x0488B21E,
+    private: 0x05358394
+  },
+  pubKeyHash: 0x1CB8,
+  scriptHash: 0x1CBD,
+  wif: 0x80
+};
+

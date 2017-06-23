@@ -1189,6 +1189,13 @@
                 DOM.bip44coin.val(1);
             },
         },
+        {
+            name: "Zcash",
+            onSelect: function() {
+                network = bitcoin.networks.zcash;
+                DOM.bip44coin.val(133);
+            },
+        }
     ]
 
     var clients = [
