@@ -731,7 +731,7 @@ page.open(url, function(status) {
         $(".phrase").trigger("input");
         $(".network option[selected]").removeAttr("selected");
         $(".network option").filter(function() {
-            return $(this).html() == "Ethereum";
+            return $(this).html() == "Ethereum (Standard BIP44)";
         }).prop("selected", true);
         $(".network").trigger("change");
     });
