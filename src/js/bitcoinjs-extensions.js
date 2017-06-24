@@ -145,6 +145,7 @@ bitcoin.networks.ledgeretc = {
   pubKeyHash: 0xff,
   wif: 0xff,
   ethereum: true,
-  noChange: true
+  noChange: true,
+  extraCoin: "160720'"
 };
 

@@ -433,6 +433,9 @@
             var path = "m/";
             path += purpose + "'/";
             path += coin + "'/";
+            if (network.extraCoin) {
+                path += network.extraCoin + "/";
+            }
             path += account + "'";
             if (!network.noChange) {
                 path += "/" + change;
@@ -1118,7 +1121,7 @@
             name: "Ethereum Classic (Ledger Nano S)",
             onSelect: function() {
                 network = bitcoin.networks.ledgeretc;
-                DOM.bip44coin.val(61);
+                DOM.bip44coin.val(60);
             },
         },
         {
