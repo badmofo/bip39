@@ -1076,6 +1076,13 @@
             },
         },
         {
+            name: "Bitcoin Cash",
+            onSelect: function() {
+                network = bitcoin.networks.bitcoin;
+                DOM.bip44coin.val(145);
+            },
+        },
+        {
             name: "CLAM",
             onSelect: function() {
                 network = bitcoin.networks.clam;
